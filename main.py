@@ -87,7 +87,7 @@ class Bird(pygame.sprite.Sprite):
         mouse = pygame.mouse.get_pressed()
         if mouse[0] and self.button_click and not game_over:
             self.button_click = False
-            self.vel -= 5
+            self.vel -= 4
         if mouse[0] == 0:
             self.button_click = True
         # Bird image animation
