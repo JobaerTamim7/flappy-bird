@@ -16,7 +16,7 @@ game_width = 750
 game_height = 600
 icon = pygame.image.load(join('assets', 'images', 'icon.png'))
 pygame.display.set_icon(icon)
-pygame.display.set_caption('Floppi Bird')
+pygame.display.set_caption('Floppy Bird')
 display_screen = pygame.display.set_mode((game_width, game_height))
 
 # Loading images
@@ -36,12 +36,12 @@ pipe_gap = 150
 pipe_frequency = 1500
 last_pipe = pygame.time.get_ticks()
 
-# score 
+# score and text
 pipe_pass = False
 score = 0
 score_font = pygame.font.SysFont('Helvetica',60)
 score_color = (149, 116, 255)
-
+manual = True
 
 def reset_game():
     pipe_group.empty()
@@ -130,9 +130,9 @@ class button():
         display_screen.blit(self.image,(self.rect.x,self.rect.y))
         return action
 
-def draw_text(text,font,text_col):
+def draw_text(text,font,text_col,x=game_width/2,y=5):
     img = font.render(text,True,text_col)
-    display_screen.blit(img,(game_width/2,5))
+    display_screen.blit(img,(x,y))
 
 # Sprite groups
 bird_group = pygame.sprite.Group()
@@ -142,12 +142,16 @@ pipe_group = pygame.sprite.Group()
 flappy = Bird(100, int(game_height / 2))
 bird_group.add(flappy)
 btn = button(int(game_width/2)-150,int(game_height/2)-100,button_image)
+
 # Main game loop
 run = True
 while run:
     game_clock.tick(game_fps)
     display_screen.blit(background_image, (0, 0))
-
+    if manual :
+        draw_text('Click Mouse Left to ARISE!!!!', score_font,score_color,50,100)
+        if fly == True:
+            manual = False
     bird_group.draw(display_screen)
     bird_group.update()
 
